@@ -1,4 +1,4 @@
-import 'package:flutter_bloc_petize/pessoa/domain/model/person_model.dart';
+import '../../domain/model/person_model.dart';
 
 abstract class PersonState {}
 
