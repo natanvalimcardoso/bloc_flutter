@@ -7,7 +7,7 @@ import 'person_state.dart';
 class PersonBloc extends Bloc<PersonEvent, PersonState> {
   PersonBloc() : super(InitialPersonState()) {
     on<FetchPeopleEvent>(_fetchPeople);
-    // on<CreatePersonEvent>(_createNewPerson);
+    on<CreatePersonEvent>(_createNewPerson);
   }
 
   Future<void> _fetchPeople(event, emit) async {
@@ -28,13 +28,13 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
     }
   }
 
-//   Future<void> _createNewPerson(CreatePersonEvent event, emit) async {
-//     final model = event.model;
-//     emit(LoadingPersonState());
-//     await _createNewPersonFunction(model);
-//     add(FetchPeopleEvent()); //* depois de criar uma pessoa ele vai chamar o estado de  _fetchPeople ou seja mostrar as pessoas
-//   }
-// }
+  Future<void> _createNewPerson(CreatePersonEvent event, emit) async {
+    final model = event.model;
+    emit(LoadingPersonState());
+    await _createNewPersonFunction(model);
+    add(FetchPeopleEvent()); 
+  }
+}
 
 //------------------------ User Case ---------------------------------//
 
@@ -49,9 +49,9 @@ List<PersonModel> _fetchPeopleFunction() {
   return people;
 }
 
-// List<PersonModel> _createNewPersonFunction(PersonModel model) {
-//   List<PersonModel> people = [
-//     PersonModel(name: model.name, email: model.email, phone: model.phone),
-//   ];
-//   return people;
+List<PersonModel> _createNewPersonFunction(PersonModel model) {
+  List<PersonModel> people = [
+    PersonModel(name: model.name, email: model.email, phone: model.phone),
+  ];
+  return people;
  }
